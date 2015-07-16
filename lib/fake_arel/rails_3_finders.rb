@@ -14,7 +14,8 @@ module Rails3Finders
       named_scope :group, lambda {|*group| {:group => group.flatten.join(',') }}
       named_scope :readonly, lambda {|readonly| {:readonly => readonly }}
       named_scope :lock, lambda {|*lock| lock = [true] if lock.empty?; {:lock => lock.first }}
-
+      named_scope :extending, lambda{|extending| {:extend => extending}}
+      
       def self.select(value = Proc.new)
         if block_given?
           all.select {|*block_args| value.call(*block_args) }
